@@ -27,6 +27,7 @@ add_subdirectory("ImGui")
 include_directories(${VEngine_SOURCE_DIR}/ImGui)
 link_directories(${VEngine_SOURCE_DIR}/ImGui)
 
+add_subdirectory("Runtime")
 
 add_subdirectory ("ImGui_Test")
 add_subdirectory("DX12_Test")

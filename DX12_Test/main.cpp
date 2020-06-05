@@ -233,7 +233,7 @@ int main(int, char**)
 
 bool CreateDeviceD3D(HWND hWnd)
 {
-    // Setup swap chain
+    // Setup swap chain Description
     DXGI_SWAP_CHAIN_DESC1 sd;
     {
         ZeroMemory(&sd, sizeof(sd));
@@ -260,10 +260,12 @@ bool CreateDeviceD3D(HWND hWnd)
     }
 #endif
 
+    //Create Device 
     D3D_FEATURE_LEVEL featureLevel = D3D_FEATURE_LEVEL_11_0;
     if (D3D12CreateDevice(NULL, featureLevel, IID_PPV_ARGS(&g_pd3dDevice)) != S_OK)
         return false;
 
+    //Create Descriptor Heap for Render Target View
     {
         D3D12_DESCRIPTOR_HEAP_DESC desc = {};
         desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_RTV;
@@ -282,6 +284,7 @@ bool CreateDeviceD3D(HWND hWnd)
         }
     }
 
+    //Create Descriptor Heap for CBuffer & Shader Resource
     {
         D3D12_DESCRIPTOR_HEAP_DESC desc = {};
         desc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
@@ -291,6 +294,7 @@ bool CreateDeviceD3D(HWND hWnd)
             return false;
     }
 
+    //Create CommandQueue description
     {
         D3D12_COMMAND_QUEUE_DESC desc = {};
         desc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
