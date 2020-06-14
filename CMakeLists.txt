@@ -7,9 +7,13 @@ project ("VEngine")
 
 # <<< General set up >>>
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+if (MSVC_VERSION GREATER_EQUAL "1900")
+    include(CheckCXXCompilerFlag)
+    CHECK_CXX_COMPILER_FLAG("/std:c++latest" _cpp_latest_flag_supported)
+    if (_cpp_latest_flag_supported)
+        add_compile_options("/std:c++latest")
+    endif()
+endif()
 
 #CMAKE_INSTALL_PREFIX   : by default :/usr/local on Unix and c:\Program Files on Windows
 message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
@@ -28,8 +32,14 @@ include_directories(${VEngine_SOURCE_DIR}/ImGui)
 link_directories(${VEngine_SOURCE_DIR}/ImGui)
 
 add_subdirectory("Runtime")
+include_directories(${VEngine_SOURCE_DIR}/Runtime)
+link_directories(${VEngine_SOURCE_DIR}/Runtime)
 
 add_subdirectory ("ImGui_Test")
 add_subdirectory("DX12_Test")
 add_subdirectory("DX11_Test")
+
+add_subdirectory("Editor")
+
+
 

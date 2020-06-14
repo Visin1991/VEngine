@@ -2,6 +2,11 @@
 
 constexpr auto engine_version = "v0.1";
 
+//for some reason, I need to manual enable the C++17; CMake cannnot detect the C++17 for MSVC
+//This is not safe
+//#define _HAS_CXX17 1
+//#define _HAS_CXX20 1
+
 #define API_GRAPHICS_D3D11
 
 #define API_INPUT_WINDOWS
@@ -21,6 +26,7 @@ constexpr auto engine_version = "v0.1";
 #pragma warning(disable: 4506)
 
 #include <assert.h>
+
 
 namespace V
 {
@@ -43,5 +49,4 @@ namespace V
 			ptr = nullptr;
 		}
 	}
-
 }

@@ -19,3 +19,9 @@ set_target_properties(Runtime
     MACOSX_RPATH ON
     WINDOWS_EXPORT_ALL_SYMBOLS ON
   )
+
+add_executable(cpp_test test.cpp)
+target_link_libraries(cpp_test Runtime)
+
+enable_testing()
+add_test( NAME cpp_test COMMAND $<TARGET_FILE:cpp_test> )
