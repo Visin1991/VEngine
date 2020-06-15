@@ -35,7 +35,7 @@ namespace V
 		LoadState_Failed
 	};
 
-	class V_API IResource : VObject
+	class V_API IResource : public VObject
 	{
 	public:
 		IResource(Context* context, Resource_Type type);
