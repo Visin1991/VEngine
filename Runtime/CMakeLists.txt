@@ -1,13 +1,17 @@
 cmake_minimum_required(VERSION 3.8)
 
-file(GLOB Runtime_Source ${CMAKE_CURRENT_SOURCE_DIR}/Core/**.cpp ${CMAKE_CURRENT_SOURCE_DIR}/Core/**.c)
+file(GLOB Runtime_Source 
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/**.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Resources/**.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Math/**.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/RHI/D3D11/**.cpp)
 
 add_definitions(-DV_RUNTIME_EXPORT=1)
 
 add_library (Runtime
 	SHARED
 	${Runtime_Source}
- )
+)
 
 set_target_properties(Runtime
   PROPERTIES
@@ -20,8 +24,8 @@ set_target_properties(Runtime
     WINDOWS_EXPORT_ALL_SYMBOLS ON
   )
 
-add_executable(cpp_test test.cpp)
-target_link_libraries(cpp_test Runtime)
+add_executable(RuntimeTest "RuntimeTest.cpp")
+target_link_libraries(RuntimeTest Runtime)
 
 enable_testing()
-add_test( NAME cpp_test COMMAND $<TARGET_FILE:cpp_test> )
+add_test( NAME RuntimeTest COMMAND $<TARGET_FILE:RuntimeTest> )

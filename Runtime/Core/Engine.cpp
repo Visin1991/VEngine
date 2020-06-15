@@ -30,10 +30,6 @@ namespace V
 		//Rgister all Modules
 		m_context->RegisterSubsystem<Timer>(Tick_Variable);
 		m_context->RegisterSubsystem<Settings>(Tick_Variable);
-		
-
-		//Initialize global/static 
-		FileSystem::Initialize();
 
 		m_context->Initialize();
 
@@ -49,8 +45,6 @@ namespace V
 		Timer* timer = m_context->GetSubsystem<Timer>().get();
 		m_context->Tick(Tick_Variable, timer->GetDeltaTimeSec());
 		m_context->Tick(Tick_Smoothed, timer->GetDeltaTimeSmoothedSec());
-
-		std::cout << timer->GetDeltaTimeSec() << std::endl;
 	}
 
 

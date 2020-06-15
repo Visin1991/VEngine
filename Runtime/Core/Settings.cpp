@@ -42,6 +42,14 @@ namespace V
 	Settings::Settings(Context* context) : IModule(context)
 	{
 		m_context = context;
+
+		// Register pugixml
+		//const auto major = to_string(PUGIXML_VERSION / 1000);
+		//const auto minor = to_string(PUGIXML_VERSION).erase(0, 1).erase(1, 1);
+		//RegisterThirdPartyLib("pugixml", major + "." + minor, "https://github.com/zeux/pugixml");
+
+		//// Register SPIRV-Cross
+		//RegisterThirdPartyLib("SPIRV-Cross", "2020-01-16", "https://github.com/KhronosGroup/SPIRV-Cross");
 	}
 
 	Settings::~Settings()
@@ -54,7 +62,7 @@ namespace V
 	{
 		Reflect();
 
-		if (FileSystem::FileExists(_Settings::file_name))
+		if (FileSystem::Exists(_Settings::file_name))
 		{
 			Load();
 			Map();
@@ -73,6 +81,11 @@ namespace V
 		return true;
 	}
 
+	void Settings::RegisterThirdPartyLib(const std::string& name, const std::string& version, const std::string& url)
+	{
+		m_third_party_libs.emplace_back(name, version, url);
+	}
+
 	void Settings::Save() const
 	{
 		//Create a settings file
@@ -82,11 +95,12 @@ namespace V
 		_Settings::write_setting(_Settings::fout, "bFullScreen", m_is_fullscreen);
 		_Settings::write_setting(_Settings::fout, "bIsMouseVisible", m_is_mouse_visible);
 		_Settings::write_setting(_Settings::fout, "fResolutionWidth", width);
-		_Settings::write_setting(_Settings::fout, "fResolutionHeight",height);
+		_Settings::write_setting(_Settings::fout, "fResolutionHeight", height);
 		_Settings::write_setting(_Settings::fout, "iShadowMapResolution", m_shadow_map_resolution);
 		_Settings::write_setting(_Settings::fout, "iAnisotropy", m_anisotropy);
 		_Settings::write_setting(_Settings::fout, "fFPSLimit", m_fps_limit);
 		_Settings::write_setting(_Settings::fout, "iMaxThreadCount", m_max_thread_count);
+		_Settings::write_setting(_Settings::fout, "iRendererFlags", m_renderer_flags);
 
 		_Settings::fout.close();
 	}
@@ -100,14 +114,15 @@ namespace V
 		float resolution_y = 0;
 
 		//Create a settings file
-		_Settings::read_setting(_Settings::fin, "bFullScreen", m_is_fullscreen);
-		_Settings::read_setting(_Settings::fin, "bIsMouseVisible", m_is_mouse_visible);
-		_Settings::read_setting(_Settings::fin, "fResolutionWidth", resolution_x);
-		_Settings::read_setting(_Settings::fin, "fResolutionHeight", resolution_y);
-		_Settings::read_setting(_Settings::fin, "iShadowMapResolution", m_shadow_map_resolution);
-		_Settings::read_setting(_Settings::fin, "iAnisotropy", m_anisotropy);
-		_Settings::read_setting(_Settings::fin, "fFPSLimit", m_fps_limit);
-		_Settings::read_setting(_Settings::fin, "iMaxThreadCount", m_max_thread_count);
+		_Settings::write_setting(_Settings::fout, "bFullScreen", m_is_fullscreen);
+		_Settings::write_setting(_Settings::fout, "bIsMouseVisible", m_is_mouse_visible);
+		_Settings::write_setting(_Settings::fout, "fResolutionWidth", width);
+		_Settings::write_setting(_Settings::fout, "fResolutionHeight", height);
+		_Settings::write_setting(_Settings::fout, "iShadowMapResolution", m_shadow_map_resolution);
+		_Settings::write_setting(_Settings::fout, "iAnisotropy", m_anisotropy);
+		_Settings::write_setting(_Settings::fout, "fFPSLimit", m_fps_limit);
+		_Settings::write_setting(_Settings::fout, "iMaxThreadCount", m_max_thread_count);
+		_Settings::write_setting(_Settings::fout, "iRendererFlags", m_renderer_flags);
 		
 		_Settings::fin.close();
 	}
@@ -117,7 +132,7 @@ namespace V
 		//......
 	}
 
-	void Settings::Map()
+	void Settings::Map() const
 	{
 		//......
 	}

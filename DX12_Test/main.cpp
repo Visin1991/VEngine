@@ -9,7 +9,7 @@
 #include <dxgi1_4.h>
 #include <tchar.h>
 
-#include <stb_image.h>
+//#include <stb_image.h>
 
 
 
