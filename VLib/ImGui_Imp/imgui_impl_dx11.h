@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 // dear imgui: Renderer for DirectX11
 // This needs to be used along with a Platform Binding (e.g. Win32)
 
@@ -10,7 +12,7 @@
 // https://github.com/ocornut/imgui
 
 #pragma once
-#include <imgui.h>// IMGUI_IMPL_API
+#include "../ImGui/imgui.h"
 
 struct ID3D11Device;
 struct ID3D11DeviceContext;
@@ -23,3 +25,5 @@ IMGUI_IMPL_API void     ImGui_ImplDX11_RenderDrawData(ImDrawData* draw_data);
 // Use if you want to reset your rendering device without losing Dear ImGui state.
 IMGUI_IMPL_API void     ImGui_ImplDX11_InvalidateDeviceObjects();
 IMGUI_IMPL_API bool     ImGui_ImplDX11_CreateDeviceObjects();
+
+#endif

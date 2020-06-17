@@ -1,3 +1,5 @@
+#ifdef _WIN32
+
 // dear imgui: Platform Binding for Windows (standard windows API for 32 and 64 bits applications)
 // This needs to be used along with a Renderer (e.g. DirectX11, OpenGL3, Vulkan..)
 
@@ -7,7 +9,7 @@
 //  [X] Platform: Keyboard arrays indexed using VK_* Virtual Key Codes, e.g. ImGui::IsKeyPressed(VK_SPACE).
 //  [X] Platform: Gamepad support. Enabled with 'io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad'.
 
-#include <imgui.h>
+#include "../ImGui/imgui.h"
 #include "imgui_impl_win32.h"
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
@@ -134,7 +136,7 @@ static bool ImGui_ImplWin32_UpdateMouseCursor()
         case ImGuiMouseCursor_ResizeNESW:   win32_cursor = IDC_SIZENESW; break;
         case ImGuiMouseCursor_ResizeNWSE:   win32_cursor = IDC_SIZENWSE; break;
         case ImGuiMouseCursor_Hand:         win32_cursor = IDC_HAND; break;
-        //case ImGuiMouseCursor_NotAllowed:   win32_cursor = IDC_NO; break;
+            //case ImGuiMouseCursor_NotAllowed:   win32_cursor = IDC_NO; break;
         }
         ::SetCursor(::LoadCursor(NULL, win32_cursor));
     }
@@ -269,6 +271,7 @@ void    ImGui_ImplWin32_NewFrame()
 // Copy this line into your .cpp file to forward declare the function.
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
+
 IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     if (ImGui::GetCurrentContext() == NULL)
@@ -323,11 +326,11 @@ IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARA
         if (wParam < 256)
             io.KeysDown[wParam] = 0;
         return 0;
-    //case WM_CHAR:
-    //    // You can also use ToAscii()+GetKeyboardState() to retrieve characters.
-    //    if (wParam > 0 && wParam < 0x10000)
-    //        io.AddInputCharacterUTF16((unsigned short)wParam);
-    //    return 0;
+        //case WM_CHAR:
+        //    // You can also use ToAscii()+GetKeyboardState() to retrieve characters.
+        //    if (wParam > 0 && wParam < 0x10000)
+        //        io.AddInputCharacterUTF16((unsigned short)wParam);
+        //    return 0;
     case WM_SETCURSOR:
         if (LOWORD(lParam) == HTCLIENT && ImGui_ImplWin32_UpdateMouseCursor())
             return 1;
@@ -443,3 +446,5 @@ float ImGui_ImplWin32_GetDpiScaleForHwnd(void* hwnd)
 }
 
 //---------------------------------------------------------------------------------------------------------
+
+#endif

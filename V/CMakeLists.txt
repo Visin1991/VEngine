@@ -10,6 +10,5 @@ add_executable(V ${VEngineSource})
 
 target_link_libraries(V
 	PUBLIC
-	ImGui
 	VLib
 )

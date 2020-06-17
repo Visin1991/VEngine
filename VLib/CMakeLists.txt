@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 3.8)
 
 file(GLOB VLib_Source
 	./**.cpp
-	./VRHI/**.cpp
+	./RHI/**.cpp
+    ./RHI/RHI_Imp/**.cpp
+    ./ImGui/**.cpp
+    ./ImGui_Imp/**.cpp
 )
 
 add_definitions(-DV_EXPORT=1)
+
 
 add_library (VLib
 	SHARED
@@ -22,6 +26,7 @@ set_target_properties(VLib
     MACOSX_RPATH ON
     WINDOWS_EXPORT_ALL_SYMBOLS ON
   )
+
 
 #add current directory; So our TestDir can find the header of VLib
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})

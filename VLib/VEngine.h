@@ -1,8 +1,7 @@
 #pragma once
 
-#include <string>
-
 #include "VEngineConfig.h"
+#include "RHI/RHI.h"
 
 namespace V
 {
@@ -10,6 +9,11 @@ namespace V
 	{
 	public:
 		VEngine() = default;
-		void InitRHI(std::string& info);
+		void ResizeSurface(unsigned int width, unsigned int height, void* _handle = nullptr, void* instance = nullptr);
+		void Update();
+		bool Init(void* wc, void* hwnd);
+
+	public:
+		RHI m_rhi;
 	};
 }

@@ -7,9 +7,6 @@ class VEngineLoop
 {
 public:
 	VEngineLoop() = default;
-	void Init();
-
-private:
-	int InitWindow();
+	void Run();
 };
 

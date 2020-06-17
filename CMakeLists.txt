@@ -25,19 +25,10 @@ set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 
-add_subdirectory("ImGui")
-
-#Set the Header and libraries files for our project
-include_directories(${VEngine_SOURCE_DIR}/ImGui)
-link_directories(${VEngine_SOURCE_DIR}/ImGui)
-
-add_subdirectory ("ImGui_Test")
-add_subdirectory("DX12_Test")
-add_subdirectory("DX11_Test")
-
 add_subdirectory("VLib")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VLib)
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/VLib)
+
 
 
 add_subdirectory("V")
