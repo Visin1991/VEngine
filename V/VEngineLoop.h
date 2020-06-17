@@ -1,9 +1,12 @@
 #pragma once
 
-class Editor
+#include <functional>
+
+
+class VEngineLoop
 {
 public:
-	Editor() = default;
+	VEngineLoop() = default;
 	void Init();
 
 private:

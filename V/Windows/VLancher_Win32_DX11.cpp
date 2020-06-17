@@ -1,6 +1,9 @@
 // dear imgui - standalone example application for DirectX 11
 // If you are new to dear imgui, see examples/README.txt and documentation at the top of imgui.cpp.
 
+#include <memory>
+#include <string>
+
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
@@ -14,7 +17,16 @@
 #pragma comment (lib, "d3d11.lib")
 
 
-#include "Editor.h"
+#include "../VEngineLoop.h"
+
+#include <VEngine.h>
+
+using namespace V;
+std::unique_ptr<V::VEngine> g_engine;
+
+
+
+
 
 
 // Data
@@ -31,29 +43,18 @@ void CleanupRenderTarget();
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 
-
-	void Editor::Init()
-	{
-		//Init native platform specific
-		InitWindow();
-		
-		//Initialize Context......
-		//Initialize Renderer......
-		//Initialize Profiler......
-		//Initialize RHI......
-		//Initialize Graphic API
-		
-		//Initialize ThridParty API
-		//Initialize IMGUI......
-
-	}
-
-	int Editor::InitWindow()
+	int VEngineLoop::InitWindow()
 	{	
         // Create application window
         WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("VEngine"), NULL };
         ::RegisterClassEx(&wc);
         HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("VEngine"), WS_OVERLAPPEDWINDOW, 100, 100, 1280, 800, NULL, NULL, wc.hInstance, NULL);
+
+
+        std::string info = "VEngineLoop InitiWindow Call......";
+        g_engine = std::make_unique<V::VEngine>();
+        g_engine->InitRHI(info);
+
 
         // Initialize Direct3D
         if (!CreateDeviceD3D(hwnd))

@@ -1,12 +1,14 @@
+#include <string>
 
-#ifdef _WIN32
+#include "VEngineLoop.h"
+#include <VLibGlobal.h>
 
-
-#include "Editor.h"
 
 
 int main(int argc, char** argv)
 {
+    std::string info = "Hi ! call from the Engine Programing";
+    V::SetGlobalString(info);
 
     //================================================================================================
     //Process the commandline argument,
@@ -16,12 +18,10 @@ int main(int argc, char** argv)
     bool runEditor = true;
     if (runEditor)
     {
-        Editor editor;
+        VEngineLoop editor;
         editor.Init();
     }
 
     //================================================================================================
     return 0;
 }
-
-#endif
