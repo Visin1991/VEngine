@@ -5,6 +5,7 @@
 
 #include <memory>
 #include <string>
+#include <iostream>
 
 #include <Windows.h>
 #include <tchar.h>
@@ -14,9 +15,7 @@
 #include <ImGui/imgui.h>
 #include <VEngine.h>
 
-using namespace V;
-std::unique_ptr<V::VEngine> g_engine;
-
+V::VEngine g_engine;
 
 // Forward declare message handler from imgui_impl_win32.cpp.
 // Right now, I just use IMGUI win32 implmentation of processing Input and event.
@@ -34,7 +33,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_SIZE:
         if (wParam != SIZE_MINIMIZED)
         {
-            g_engine->ResizeSurface((UINT)LOWORD(lParam), (UINT)HIWORD(lParam), hWnd, nullptr);
+            g_engine.ResizeWindow((UINT)LOWORD(lParam), (UINT)HIWORD(lParam), hWnd, nullptr);
         }
         return 0;
     case WM_SYSCOMMAND:
@@ -51,9 +50,6 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 void VEngineLoop::Run()
 {
-    //Create Engine
-    g_engine = std::make_unique<V::VEngine>();
-
     // Create application window-------Register WindowPro callback function
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, _T("VEngine"), NULL };
     ::RegisterClassEx(&wc);
@@ -62,17 +58,37 @@ void VEngineLoop::Run()
     const int windowHeight = GetSystemMetrics(SM_CYSCREEN);
     HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("VEngine"), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, NULL, NULL, wc.hInstance, NULL);
 
+    //Init Engine
+    assert(g_engine.Init(&wc, hwnd));+
+
     // Show the window
     ::ShowWindow(hwnd, SW_MAXIMIZE);
     ::UpdateWindow(hwnd);
     ::SetFocus(hwnd);
 
-    if (g_engine->Init(&wc, hwnd))
+    // Main loop
+    MSG msg;
+    ZeroMemory(&msg, sizeof(msg));
+    while (msg.message != WM_QUIT)
     {
-        g_engine->Update();
+        // Poll and handle messages (inputs, window resize, etc.)
+        // You can read the io.WantCaptureMouse, io.WantCaptureKeyboard flags to tell if dear imgui wants to use your inputs.
+        // - When io.WantCaptureMouse is true, do not dispatch mouse input data to your main application.
+        // - When io.WantCaptureKeyboard is true, do not dispatch keyboard input data to your main application.
+        // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
+        if (::PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+        {
+            ::TranslateMessage(&msg);
+            ::DispatchMessage(&msg);
+            continue;
+        }
+
+        g_engine.Update();
     }
 
-    //Exit();
+    g_engine.Terminate();
+
+    
     ::DestroyWindow(hwnd);
     ::UnregisterClass(wc.lpszClassName, wc.hInstance);
 }

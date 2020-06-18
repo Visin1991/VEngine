@@ -29,8 +29,6 @@ add_subdirectory("VLib")
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/VLib)
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/VLib)
 
-
-
 add_subdirectory("V")
 
 

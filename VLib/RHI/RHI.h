@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "ImGui/imgui.h"
+
 #include "../VEngineConfig.h"
 
 #include "RHI_SwapChain.h"
@@ -14,10 +16,13 @@ namespace V
 	{
 	public:
 		RHI()=default;
+		~RHI();
 		
 		bool Init(void* _wc, void* _hwnd);
 
 		void Update();
+
+		void Rendering();
 
 		void ResizeSurface(unsigned int _width, unsigned int _height, void* _handle, void* _instance);
 
@@ -28,11 +33,21 @@ namespace V
 		bool Create_ImGui();
 		void Create_ImGui_Platform();
 
-		void Update_Platform();
+		void Update_ImGui();
+		void Update_ImGui_NewFrame_Platform();
+
+		void Rendering_ImGUI_Platform();
+
+		void Destroy_Platform();
 
 	public:
 		void* wc;
 		void* hWnd;
+
+		// Our state
+		bool show_demo_window;
+		bool show_another_window;
+		ImVec4 clear_color;
 	};
 
 }

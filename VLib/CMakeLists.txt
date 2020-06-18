@@ -11,6 +11,7 @@ file(GLOB VLib_Source
 add_definitions(-DV_EXPORT=1)
 
 
+
 add_library (VLib
 	SHARED
 	${VLib_Source}
