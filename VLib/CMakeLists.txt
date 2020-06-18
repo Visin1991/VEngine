@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.8)
 file(GLOB VLib_Source
 	./**.cpp
 	./RHI/**.cpp
-    ./RHI/RHI_Imp/**.cpp
+    ./RHI/RHI_Platform/**.cpp
     ./ImGui/**.cpp
-    ./ImGui_Imp/**.cpp
+    ./ImGui/ImGui_Platform/**.cpp
 )
 
 add_definitions(-DV_EXPORT=1)

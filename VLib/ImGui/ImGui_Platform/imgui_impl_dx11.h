@@ -12,7 +12,7 @@
 // https://github.com/ocornut/imgui
 
 #pragma once
-#include "../ImGui/imgui.h"
+#include "../imgui.h"
 
 struct ID3D11Device;
 struct ID3D11DeviceContext;

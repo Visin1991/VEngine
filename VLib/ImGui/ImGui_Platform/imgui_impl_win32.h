@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "../ImGui/imgui.h"
+#include "../imgui.h"
 
 IMGUI_IMPL_API bool     ImGui_ImplWin32_Init(void* hwnd);
 IMGUI_IMPL_API void     ImGui_ImplWin32_Shutdown();

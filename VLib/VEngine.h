@@ -12,7 +12,6 @@ namespace V
 		void ResizeSurface(unsigned int width, unsigned int height, void* _handle = nullptr, void* instance = nullptr);
 		void Update();
 		bool Init(void* wc, void* hwnd);
-
 	public:
 		RHI m_rhi;
 	};
