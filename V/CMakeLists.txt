@@ -5,10 +5,10 @@ file(GLOB VEngineSource
 	./**.cpp 
 	)
 
-# add_executable(Editor WIN32 ${EditorSource} )
-add_executable(V ${VEngineSource})
 
-target_link_libraries(V
-	PUBLIC
+# add_executable(Editor WIN32 ${EditorSource} )
+add_executable(VEngine ${VEngineSource})
+target_link_libraries(VEngine
+	PUBLIC	
 	VLib
 )

@@ -1,21 +1,58 @@
 cmake_minimum_required(VERSION 3.8)
 
-file(GLOB VLib_Source
-    ./Core/**.cpp
-	./RHI/**.cpp
-    ./RHI/RHI_Platform/**.cpp
+
+add_definitions(-DV_EXPORT=1)
+
+#============================================================================
+# Build Library for Dear ImGUI
+
+file(GLOB ImGui_Source
     ./ImGui/**.cpp
     ./ImGui/ImGui_Platform/**.cpp
 )
 
-add_definitions(-DV_EXPORT=1)
+add_library (ImGui
+	SHARED
+	${ImGui_Source}
+)
 
-
+#============================================================================
+#Build VLib Library
+file(GLOB VLib_Source
+    ./Core/**.cpp
+	  ./RHI/**.cpp
+    ./RHI/RHI_Platform/**.cpp
+)
 
 add_library (VLib
 	SHARED
 	${VLib_Source}
 )
+
+#-----------------
+# For windows platform, we will use DX and Native window
+if(WIN32)
+  target_link_libraries(VLib
+    PUBLIC
+    ImGui
+  )
+endif()
+
+#-----------------
+# For Linux platform, we will use OpenGL and GLEW,GLFW3
+if(LINUX)
+  find_package(OpenGL REQUIRED)
+  find_package(GLEW REQUIRED)
+  find_package(glfw3 REQUIRED)
+
+  target_link_libraries(VLib
+    PUBLIC
+    GLEW::GLEW
+    glfw
+    ${OPENGL_LIBRARY}
+    ImGui
+  )
+endif()
 
 set_target_properties(VLib
   PROPERTIES
@@ -28,7 +65,4 @@ set_target_properties(VLib
     WINDOWS_EXPORT_ALL_SYMBOLS ON
   )
 
-
-#add current directory; So our TestDir can find the header of VLib
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-add_subdirectory("TestDir")
+#==================================================
