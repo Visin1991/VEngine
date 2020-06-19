@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 
 file(GLOB VLib_Source
-	./**.cpp
+    ./Core/**.cpp
 	./RHI/**.cpp
     ./RHI/RHI_Platform/**.cpp
     ./ImGui/**.cpp

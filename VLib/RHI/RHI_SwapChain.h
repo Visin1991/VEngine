@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../VEngineConfig.h"
+#include "../Core/VEngineConfig.h"
 #include "RHI_Enum.h"
 
 namespace V

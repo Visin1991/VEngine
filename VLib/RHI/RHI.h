@@ -4,7 +4,7 @@
 
 #include "ImGui/imgui.h"
 
-#include "../VEngineConfig.h"
+#include "../Core/VEngineConfig.h"
 
 #include "RHI_SwapChain.h"
 #include "RHI_RenderTarget.h"
