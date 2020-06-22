@@ -51,7 +51,7 @@ void CleanupDeviceD3D()
 
 namespace V
 {
-    bool RHI::Create_RHI_Context_Platform(RHI_SwapChain& _swapChian)
+    bool RHI::Platform_Create_Context(RHI_SwapChain& _swapChian)
     {
         // Setup swap chain
         DXGI_SWAP_CHAIN_DESC sd;
@@ -91,7 +91,8 @@ namespace V
             //ImGui::StyleColorsClassic();
 
             // Setup Platform/Renderer bindings
-            Create_ImGui_Platform();
+            ImGui_ImplWin32_Init(hWnd);
+            ImGui_ImplDX11_Init(gg_pd3dDevice, gg_pd3dDeviceContext);
 
 
             show_demo_window = true;
@@ -100,16 +101,10 @@ namespace V
         }
 
 		return true;
+
     }
 
-    void RHI::Create_ImGui_Platform()
-    {
-        // Setup Platform/Renderer bindings
-        ImGui_ImplWin32_Init(hWnd);
-        ImGui_ImplDX11_Init(gg_pd3dDevice, gg_pd3dDeviceContext);
-    }
-
-    void RHI::Update_ImGui_NewFrame_Platform()
+    void RHI::Platform_Update_ImGui_NewFrame()
     {
         // Start the Dear ImGui frame
         ImGui_ImplDX11_NewFrame();
@@ -117,7 +112,7 @@ namespace V
         ImGui::NewFrame();
     }
 
-    void RHI::Rendering_ImGUI_Platform()
+    void RHI::Platform_Rendering_ImGUI()
     {
         // Rendering
         ImGui::Render();
@@ -128,7 +123,7 @@ namespace V
         //g_pSwapChain->Present(0, 0); // Present without vsync
     }
 
-    void RHI::Destroy_Platform()
+    void RHI::Platform_Destroy()
     {
 
         // Cleanup

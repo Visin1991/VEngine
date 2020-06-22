@@ -8,7 +8,7 @@ namespace V
 {
 	RHI::~RHI()
 	{
-		Destroy_Platform();
+		Platform_Destroy();
 	}
 
 	bool RHI::Init(void* _wc, void* _hwnd)
@@ -17,12 +17,12 @@ namespace V
 		wc = _wc;
 
 		bool result = true;
-		result &= Create_RHI_Context();
+		result &= RHI_Create_Context();
 
 		return result;
 	}
 
-	bool RHI::Create_RHI_Context()
+	bool RHI::RHI_Create_Context()
 	{
 		//Create RHI SwapChain
 		RHI_SwapChain swapChian;
@@ -37,25 +37,25 @@ namespace V
 
 		bool result = true;
 
-		result &= Create_RHI_Context_Platform(swapChian);
+		result &= Platform_Create_Context(swapChian);
 
 		return true;
 	}
 
 	void RHI::Update()
 	{
-		Update_ImGui();
+		RHI_Update_ImGui();
 		Rendering();
 	}
 
 	void RHI::Rendering()
 	{
-		Rendering_ImGUI_Platform();
+		Platform_Rendering_ImGUI();
 	}
 
-	void RHI::Update_ImGui()
+	void RHI::RHI_Update_ImGui()
 	{
-		Update_ImGui_NewFrame_Platform();
+		Platform_Update_ImGui_NewFrame();
 
 		// 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
 		if (show_demo_window)

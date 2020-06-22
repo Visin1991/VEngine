@@ -27,17 +27,13 @@ namespace V
 		void ResizeSurface(unsigned int _width, unsigned int _height, void* _handle, void* _instance);
 
 	private:
-		bool Create_RHI_Context();
-		bool Create_RHI_Context_Platform(RHI_SwapChain& swapChian);
-
-		void Create_ImGui_Platform();
-
-		void Update_ImGui();
-		void Update_ImGui_NewFrame_Platform();
-
-		void Rendering_ImGUI_Platform();
-
-		void Destroy_Platform();
+		bool RHI_Create_Context();
+		void RHI_Update_ImGui();
+	private:
+		bool Platform_Create_Context(RHI_SwapChain& swapChian);
+		void Platform_Update_ImGui_NewFrame();
+		void Platform_Rendering_ImGUI();
+		void Platform_Destroy();
 
 	public:
 		void* wc;
