@@ -15,9 +15,6 @@ if (MSVC_VERSION GREATER_EQUAL "1900")
     endif()
 endif()
 
-#CMAKE_INSTALL_PREFIX   : by default :/usr/local on Unix and c:\Program Files on Windows
-message(STATUS "Project will be installed to ${CMAKE_INSTALL_PREFIX}")
-
 add_definitions(-DUNICODE -D_UNICODE)
 
 if(UNIX AND NOT APPLE)

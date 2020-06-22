@@ -57,7 +57,18 @@ endif()
 #======================================================
 #For Windows platform we need ......
 
+if(WIN32)
 
+set_target_properties(ImGui
+  PROPERTIES
+    POSITION_INDEPENDENT_CODE 1
+    CXX_VISIBILITY_PRESET hidden
+    VISIBILITY_INLINES_HIDDEN 1
+    OUTPUT_NAME "ImGui"
+    DEBUG_POSTFIX "_d"
+    MACOSX_RPATH ON
+    WINDOWS_EXPORT_ALL_SYMBOLS ON
+  )
 
 set_target_properties(VLib
   PROPERTIES
@@ -69,4 +80,6 @@ set_target_properties(VLib
     MACOSX_RPATH ON
     WINDOWS_EXPORT_ALL_SYMBOLS ON
   )
+
+endif(WIN32)
 #==================================================
