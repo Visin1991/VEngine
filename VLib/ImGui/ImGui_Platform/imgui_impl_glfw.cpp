@@ -1,4 +1,4 @@
-#ifdef __linux__
+#if defined(__linux__) || defined(FORCEGL)
 
 // dear imgui: Platform Binding for GLFW
 // This needs to be used along with a Renderer (e.g. OpenGL3, Vulkan..)
