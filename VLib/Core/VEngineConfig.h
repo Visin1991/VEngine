@@ -1,7 +1,6 @@
 #pragma once
 
 
-#define V_API
 
 #ifdef _WIN32
 	#ifdef V_EXPORT
@@ -15,4 +14,6 @@
 	#else
 		#define V_API 
 	#endif
+#else
+	#define V_API
 #endif
