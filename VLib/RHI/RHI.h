@@ -30,7 +30,6 @@ namespace V
 		bool Create_RHI_Context();
 		bool Create_RHI_Context_Platform(RHI_SwapChain& swapChian);
 
-		bool Create_ImGui();
 		void Create_ImGui_Platform();
 
 		void Update_ImGui();

@@ -49,7 +49,6 @@ void CleanupDeviceD3D()
     if (gg_pd3dDevice) { gg_pd3dDevice->Release(); gg_pd3dDevice = NULL; }
 }
 
-
 namespace V
 {
     bool RHI::Create_RHI_Context_Platform(RHI_SwapChain& _swapChian)
@@ -79,7 +78,28 @@ namespace V
 
         CreateDefaultRenderTarget();
 
-        return true;
+        //Create IMGUI
+        {
+            IMGUI_CHECKVERSION();
+            ImGui::CreateContext();
+            ImGuiIO& io = ImGui::GetIO(); (void)io;
+            //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+            //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+
+            // Setup Dear ImGui style
+            ImGui::StyleColorsDark();
+            //ImGui::StyleColorsClassic();
+
+            // Setup Platform/Renderer bindings
+            Create_ImGui_Platform();
+
+
+            show_demo_window = true;
+            show_another_window = false;
+            clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+        }
+
+		return true;
     }
 
     void RHI::Create_ImGui_Platform()
