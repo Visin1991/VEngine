@@ -58,8 +58,13 @@ void VEngineLoop::Run()
     const int windowHeight = GetSystemMetrics(SM_CYSCREEN);
     HWND hwnd = ::CreateWindow(wc.lpszClassName, _T("VEngine"), WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, windowWidth, windowHeight, NULL, NULL, wc.hInstance, NULL);
 
+    
+    //Before we Init our engien. We need to bind window call back functions, and set window handle for our engine......
+    g_engine.unique_IOHI->window = hwnd;
+
+
     //Init Engine
-    assert(g_engine.Init(&wc, hwnd));+
+    assert(g_engine.Init());
 
     // Show the window
     ::ShowWindow(hwnd, SW_MAXIMIZE);

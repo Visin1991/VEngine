@@ -18,7 +18,7 @@ namespace V
 		RHI()=default;
 		~RHI();
 		
-		bool Init(void* _wc, void* _hwnd);
+		bool Init();
 
 		void Update();
 
@@ -36,9 +36,6 @@ namespace V
 		void Platform_Destroy();
 
 	public:
-		void* wc;
-		void* hWnd;
-
 		// Our state
 		bool show_demo_window;
 		bool show_another_window;

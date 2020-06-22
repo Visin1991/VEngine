@@ -10,6 +10,9 @@
 #include <d3d11.h>
 #pragma comment (lib, "d3d11.lib")
 
+
+#include "../../Core/VEngine.h"
+
 static const DXGI_FORMAT D3d11_Format[] =
 {
     DXGI_FORMAT_R8_UNORM,
@@ -53,6 +56,9 @@ namespace V
 {
     bool RHI::Platform_Create_Context(RHI_SwapChain& _swapChian)
     {
+        auto engine = VEngine::GetEngine();
+        assert(engine!=nullptr);
+
         // Setup swap chain
         DXGI_SWAP_CHAIN_DESC sd;
         ZeroMemory(&sd, sizeof(sd));
@@ -64,7 +70,7 @@ namespace V
         sd.BufferDesc.RefreshRate.Denominator = 1;
         sd.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
         sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        sd.OutputWindow = (HWND)hWnd;
+        sd.OutputWindow = (HWND)engine->unique_IOHI->window;
         sd.SampleDesc.Count = _swapChian.SamplerCount;
         sd.SampleDesc.Quality = _swapChian.SamplerQuality;
         sd.Windowed = TRUE;
@@ -91,7 +97,7 @@ namespace V
             //ImGui::StyleColorsClassic();
 
             // Setup Platform/Renderer bindings
-            ImGui_ImplWin32_Init(hWnd);
+            ImGui_ImplWin32_Init(engine->unique_IOHI->window);
             ImGui_ImplDX11_Init(gg_pd3dDevice, gg_pd3dDeviceContext);
 
 

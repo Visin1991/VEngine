@@ -4,6 +4,8 @@
 #include "RHI_SwapChain.h"
 #include "RHI_Enum.h"
 
+#include "../Core/VEngine.h"
+
 namespace V
 {
 	RHI::~RHI()
@@ -11,11 +13,8 @@ namespace V
 		Platform_Destroy();
 	}
 
-	bool RHI::Init(void* _wc, void* _hwnd)
+	bool RHI::Init()
 	{
-		hWnd = _hwnd;
-		wc = _wc;
-
 		bool result = true;
 		result &= RHI_Create_Context();
 
@@ -24,6 +23,9 @@ namespace V
 
 	bool RHI::RHI_Create_Context()
 	{
+		auto engine = VEngine::GetEngine();
+		assert(engine!=nullptr);
+
 		//Create RHI SwapChain
 		RHI_SwapChain swapChian;
 		swapChian.BufferCount = 2;
@@ -31,7 +33,7 @@ namespace V
 		swapChian.Height = 0;
 		swapChian.format = RHI_FORMAT_R8G8B8A8_UNORM;
 		swapChian.Numerator = 60;
-		swapChian.hWnd = hWnd;
+		swapChian.hWnd = engine->unique_IOHI->window;
 		swapChian.SamplerCount = 1;
 		swapChian.SamplerQuality = 0;
 
