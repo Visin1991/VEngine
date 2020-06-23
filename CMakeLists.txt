@@ -32,6 +32,18 @@ if(UNIX AND NOT APPLE)
     set(LINUX TRUE)
 endif()
 
+
+# For Linux platform, or Force OpenGL we need to find Those Library
+# Because we will both use those lib in VLib and VEngine. So We set those library as global variable.
+if(LINUX OR FORCEGL)
+  find_package(OpenGL REQUIRED)
+  find_package(GLEW REQUIRED)
+  find_package(SDL2 CONFIG REQUIRED)
+endif()
+
+
+
+
 # Just simply copy all Library and Runtime Out put to CMAKE_BINARY_DIR
 set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})

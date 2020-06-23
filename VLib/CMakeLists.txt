@@ -41,10 +41,6 @@ endif()
 #-----------------
 # For Linux platform, we will use OpenGL and GLEW,GLFW3
 if(LINUX OR FORCEGL)
-  find_package(OpenGL REQUIRED)
-  find_package(GLEW REQUIRED)
-  find_package(SDL2 CONFIG REQUIRED)
-
   target_link_libraries(VLib
     PUBLIC
     GLEW::GLEW
