@@ -43,12 +43,12 @@ endif()
 if(LINUX OR FORCEGL)
   find_package(OpenGL REQUIRED)
   find_package(GLEW REQUIRED)
-  find_package(glfw3 CONFIG REQUIRED)
+  find_package(SDL2 CONFIG REQUIRED)
 
   target_link_libraries(VLib
     PUBLIC
     GLEW::GLEW
-    glfw
+    ${SDL2_LIBRARIES}
     ${OPENGL_LIBRARY}
     ImGui
   )

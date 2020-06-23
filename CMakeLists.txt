@@ -15,6 +15,7 @@ endif()
 
 
 # <<< General set up >>>
+set (CMAKE_CXX_STANDARD 17)
 
 if (MSVC_VERSION GREATER_EQUAL "1900")
     include(CheckCXXCompilerFlag)
