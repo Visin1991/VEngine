@@ -5,6 +5,12 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("VEngine")
 
+# cmake toolchain
+if(CMAKE_TOOLCHAIN_FILE)
+    include(${CMAKE_TOOLCHAIN_FILE})
+    message("-------------------VCPKG Path---------------------")
+    message(${CMAKE_TOOLCHAIN_FILE})
+endif(CMAKE_TOOLCHAIN_FILE)
 
 option(FORCEGL "Force to use OpenGL" OFF)
 
@@ -40,9 +46,6 @@ if(LINUX OR FORCEGL)
   find_package(GLEW REQUIRED)
   find_package(SDL2 CONFIG REQUIRED)
 endif()
-
-
-
 
 # Just simply copy all Library and Runtime Out put to CMAKE_BINARY_DIR
 set (CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
