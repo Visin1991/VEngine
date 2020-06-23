@@ -1,3 +1,5 @@
+#if defined(__linux__) || defined(FORCEGL)
+
 #include "../RHI.h"
 
 namespace V
@@ -30,3 +32,5 @@ namespace V
     }
 
 }
+
+#endif

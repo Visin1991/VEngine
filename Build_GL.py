@@ -2,7 +2,7 @@ import os
 import subprocess
 
 cwd = os.getcwd()
-buildPath = cwd + "/build"
+buildPath = cwd + "/build_GL"
 
 exist = os.path.isdir(buildPath)
 
