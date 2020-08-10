@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/usr/include/SDL2",
+                "${workspaceFolder}/VLib",
                 "${workspaceFolder}/VLib/Core",
                 "${workspaceFolder}/VLib/ImGui"
 

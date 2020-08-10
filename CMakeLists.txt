@@ -49,6 +49,10 @@ if(LINUX OR FORCEGL)
   find_package(OpenGL REQUIRED)
   find_package(GLEW REQUIRED)
   find_package(SDL2 CONFIG REQUIRED)
+
+  #Add SDL2 Header file
+  include_directories(${SDL2_INCLUDE_DIRS})
+
 endif()
 
 # Just simply copy all Library and Runtime Out put to CMAKE_BINARY_DIR
