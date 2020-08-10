@@ -18,6 +18,7 @@ add_library (ImGui
 #-----------------
 # For Linux platform, we will use OpenGL and GLEW,GLFW3
 if(LINUX OR FORCEGL)
+
   target_link_libraries(ImGui
     PUBLIC
     GLEW::GLEW

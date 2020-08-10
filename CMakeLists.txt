@@ -42,6 +42,10 @@ endif()
 # For Linux platform, or Force OpenGL we need to find Those Library
 # Because we will both use those lib in VLib and VEngine. So We set those library as global variable.
 if(LINUX OR FORCEGL)
+
+  #If we want to use leagcy OpenGL Lib, Then we can Set CMP0072 OLD
+  cmake_policy(SET CMP0072 NEW)
+
   find_package(OpenGL REQUIRED)
   find_package(GLEW REQUIRED)
   find_package(SDL2 CONFIG REQUIRED)
