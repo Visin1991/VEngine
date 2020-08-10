@@ -1,5 +1,7 @@
 #if defined(__linux__) || defined(FORCEGL)
 
+#define DEMO 1
+
 #if DEMO
 // dear imgui: standalone example application for SDL2 + OpenGL
 // If you are new to dear imgui, see examples/README.txt and documentation at the top of imgui.cpp.
