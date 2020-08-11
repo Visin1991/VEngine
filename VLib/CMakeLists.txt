@@ -40,6 +40,7 @@ file(GLOB VLib_Source
     ./Core/**.cpp
 	  ./RHI/**.cpp
     ./RHI/RHI_Platform/**.cpp
+    ./HardwareRenderer/OpenGL/**.cpp
 )
 
 add_library (VLib
